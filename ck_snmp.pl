@@ -16,16 +16,15 @@ my @snmpCmd=(
 my $reqestId="";
 my $snmpAction="";		
 		
-foreach (<>)
+while (<>)
 {
     if(/\s+data\:\s(\w+)\s\(\d\)/ || /\s+data\:\s(\w+\-\w+)\s\(\d+\)/ || /\s+data\:\s(\w+\-\w+\-\w+)\s\(\d+\)/)
     {
         $snmpAction = $1;
     }
-    if(/\s+request\-id\:\s(\d+)/)
+    if(/\s+request\-id\:\s(\d+)$/)
     {
         $reqestId=$1;
-        chomp($reqestId);
     }
     if(/No\.\s+Time/)
     {
@@ -47,9 +46,8 @@ foreach (<>)
 printf "%10s %3s %3s %3s %3s %3s %3s\n","Reqest_id","get","set","nxt","blk","trp","rsp";
 foreach my $rqid(sort{$a<=>$b}  keys %rqstId)
 {
-    my $line="";
     my $errFlag=0;
-    $line=sprintf("%10s ",$rqid);
+    my $line=sprintf("%10s ",$rqid);
     for(my $i=0;$i<6;$i++)
     {
         if(defined $rqstId{$rqid}{$snmpCmd[$i]})
