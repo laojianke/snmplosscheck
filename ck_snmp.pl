@@ -2,19 +2,19 @@
 use strict;
 use warnings;
 
+#The max number of duplicated request id of SNMP packets
 my $DUPLICATED_REQSTID=2;
 
 my %rqstId=();
 my @snmpCmd=(
-			'get-request',
-			'set-request',
-			'get-next-request',
-			'getBulkRequest',
-			'snmpV2-trap',			
-			'get-response',			
-		);
-my $reqestId="";
-my $snmpAction="";		
+	'get-request',
+	'set-request',
+	'get-next-request',
+	'getBulkRequest',
+	'snmpV2-trap',			
+	'get-response',			
+	);
+my ($reqestId,$snmpAction);
 		
 while (<>)
 {
